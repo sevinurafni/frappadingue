@@ -1,7 +1,7 @@
 {
   "name": "irrigation-robot-sim",
-  "homepage": ".",
   "version": "0.1.0",
+  "homepage": "https://sevinurafni.github.io/frappadingue",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -18,7 +18,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build:all && gh-pages -d deploy",
+    "build:all": "npm run build:sim && npm run prepare:deploy",
+    "build:sim": "cd irrigation-robot-sim && npm run build && cd ..",
+    "prepare:deploy": "rm -rf deploy && mkdir -p deploy/irrigation-robot-sim && cp index.html deploy/ && cp -r irrigation-robot-sim/build/* deploy/irrigation-robot-sim/"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +45,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "gh-pages": "^6.1.0"
   }
 }
