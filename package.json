@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "homepage": "https://sevinurafni.github.io/frappadingue",
   "scripts": {
-    "deploy": "npm run build:all && gh-pages -d deploy",
-    "build:all": "npm run build:sim && npm run prepare:deploy",
+    "predeploy": "npm run build:all",
+    "deploy": "gh-pages -d deploy",
+    "build:all": "npm run clean && npm run build:sim && npm run copy:files",
+    "clean": "rm -rf deploy && mkdir -p deploy",
     "build:sim": "cd irrigation-robot-sim && npm install && npm run build && cd ..",
-    "prepare:deploy": "mkdir -p deploy && cp index.html deploy/ && cp -r irrigation-robot-sim/build deploy/irrigation-robot-sim"
+    "copy:files": "cp index.html deploy/ && mkdir -p deploy/irrigation-robot-sim && cp -r irrigation-robot-sim/build/. deploy/irrigation-robot-sim/"
   },
   "devDependencies": {
     "gh-pages": "^6.1.0"
